@@ -19,6 +19,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: 'darkslateblue',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   input: {
     height: 40,
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderRadius: 5,
     color: '#fff',
+    width: '80%',
   },
 });
 

@@ -12,6 +12,7 @@ import {
 
 const AddItem = ({addItem}) => {
   const [text, setText] = useState('');
+  const [category, setCategory] = useState('General');
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleAddItem = () => {
@@ -24,8 +25,9 @@ const AddItem = ({addItem}) => {
   };
 
   const confirmAddItem = () => {
-    addItem(text);
+    addItem(text, category);
     setText('');
+    setCategory('General');
     setModalVisible(false);
   };
 
@@ -37,6 +39,33 @@ const AddItem = ({addItem}) => {
         onChangeText={setText}
         value={text}
       />
+      <Text style={styles.categoryText}>Select Category:</Text>
+      <View style={styles.categoryButtons}>
+        <TouchableOpacity
+          style={[
+            styles.categoryButton,
+            category === 'General' && styles.selectedCategory,
+          ]}
+          onPress={() => setCategory('General')}>
+          <Text style={styles.categoryButtonText}>General</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.categoryButton,
+            category === 'Personal' && styles.selectedCategory,
+          ]}
+          onPress={() => setCategory('Personal')}>
+          <Text style={styles.categoryButtonText}>Personal</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.categoryButton,
+            category === 'Work' && styles.selectedCategory,
+          ]}
+          onPress={() => setCategory('Work')}>
+          <Text style={styles.categoryButtonText}>Work</Text>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
         <Text style={styles.btnText}>Add Todo</Text>
       </TouchableOpacity>
@@ -93,6 +122,32 @@ const styles = StyleSheet.create({
     gap: 10,
     marginTop: 10,
     justifyContent: 'space-between',
+  },
+  categoryText: {
+    padding: 10,
+    fontSize: 18,
+    marginTop: 15,
+    marginBottom: 5,
+  },
+  categoryButtons: {
+    padding: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 15,
+  },
+  categoryButton: {
+    backgroundColor: '#c2bad8',
+    padding: 10,
+    borderRadius: 5,
+    minWidth: 80,
+    alignItems: 'center',
+  },
+  categoryButtonText: {
+    color: 'darkslateblue',
+    fontSize: 16,
+  },
+  selectedCategory: {
+    backgroundColor: '#8a99e0',
   },
 });
 

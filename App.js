@@ -70,12 +70,15 @@ const App = () => {
     editItemDetailChange({id: editItemDetail.id, text});
   };
 
-  const addItem = text => {
-    if (!text) {
-      Alert.alert('Nothing entered', 'Please enter something!');
+  const addItem = (text, category) => {
+    if (!text.trim()) {
+      Alert.alert('Please enter a todo!');
       return;
     }
-    setItems(prevItems => [{id: UUID.v4(), text}, ...prevItems]);
+    setItems(prevItems => [
+      {id: UUID.v4(), text, category, isChecked: false},
+      ...prevItems,
+    ]);
   };
 
   const editItem = (id, text) => {

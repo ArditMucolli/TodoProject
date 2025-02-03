@@ -22,6 +22,7 @@ const ListItem = ({
   const checked = checkedItems.filter(
     checkedItem => checkedItem.id === item.id,
   );
+
   return (
     <TouchableOpacity style={styles.listItem}>
       <View style={styles.listItemView}>
@@ -40,6 +41,7 @@ const ListItem = ({
             {item.text}
           </Text>
         )}
+        <Text style={styles.categoryText}>{item.category}</Text>
         <View style={styles.iconView}>
           {isEditing && editItemDetail.id === item.id ? (
             <Icon
@@ -89,6 +91,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textDecorationLine: 'line-through',
     color: 'green',
+  },
+  categoryText: {
+    fontSize: 14,
+    color: 'gray',
+    marginLeft: 10,
   },
   iconView: {
     flexDirection: 'row',
