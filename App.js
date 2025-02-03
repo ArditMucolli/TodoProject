@@ -54,7 +54,24 @@ const App = () => {
   }, [items, checkedItems]);
 
   const deleteItem = id => {
-    setItems(prevItems => prevItems.filter(item => item.id !== id));
+    Alert.alert(
+      'Delete Todo',
+      'Are you sure you want to delete this todo?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            setItems(prevItems => prevItems.filter(item => item.id !== id));
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
 
   const saveEditItem = (id, text) => {
@@ -119,8 +136,6 @@ const App = () => {
         <Text style={styles.headerTitleLeft}>Todos</Text>
         <Text style={styles.headerTitle}>Category</Text>
       </View>
-
-      {/* List of filtered items */}
       <FlatList
         data={filteredItems}
         renderItem={({item}) => (
