@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList, Alert} from 'react-native';
+import {View, StyleSheet, FlatList, Alert, Text} from 'react-native';
 import UUID from 'react-native-uuid';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
@@ -58,6 +58,11 @@ const App = () => {
   };
 
   const saveEditItem = (id, text) => {
+    if (!text.trim()) {
+      Alert.alert('Invalid input', 'Todo cannot be empty!');
+      return;
+    }
+
     setItems(prevItems => {
       return prevItems.map(item => (item.id === id ? {...item, text} : item));
     });
@@ -109,6 +114,13 @@ const App = () => {
       <Header title="Todo App" />
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <AddItem addItem={addItem} existingItems={items} />
+
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerTitleLeft}>Todos</Text>
+        <Text style={styles.headerTitle}>Category</Text>
+      </View>
+
+      {/* List of filtered items */}
       <FlatList
         data={filteredItems}
         renderItem={({item}) => (
@@ -124,6 +136,8 @@ const App = () => {
             checkedItems={checkedItems}
           />
         )}
+        keyExtractor={item => item.id.toString()}
+        contentContainerStyle={styles.listContainer}
       />
     </View>
   );
@@ -132,6 +146,34 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  headerContainer: {
+    marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 12,
+    backgroundColor: '#ffffff',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderColor: '#ddd',
+  },
+  headerTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    width: '45%',
+    textAlign: 'center',
+  },
+  headerTitleLeft: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    width: '45%',
+    textAlign: 'left',
+  },
+  listContainer: {
+    paddingBottom: 20,
   },
 });
 

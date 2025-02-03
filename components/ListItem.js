@@ -30,11 +30,11 @@ const ListItem = ({
           <TextInput
             placeholder="Edit Todo..."
             style={styles.editItemInput}
-            value={editItemDetail.text} // Edit only the text
-            onChangeText={handleEditChange} // handle text input change
+            value={editItemDetail.text}
+            onChangeText={handleEditChange}
           />
         ) : (
-          <>
+          <View style={styles.textContainer}>
             <Text
               onPress={() => itemChecked(item.id, item.text)}
               style={
@@ -42,9 +42,8 @@ const ListItem = ({
               }>
               {item.text}
             </Text>
-            <Text style={styles.categoryText}>{item.category}</Text>{' '}
-            {/* Always display the category */}
-          </>
+            <Text style={styles.categoryText}>{item.category}</Text>
+          </View>
         )}
 
         <View style={styles.iconView}>
@@ -53,7 +52,7 @@ const ListItem = ({
               name="save"
               size={20}
               color="green"
-              onPress={() => saveEditItem(item.id, editItemDetail.text)} // Save only text
+              onPress={() => saveEditItem(item.id, editItemDetail.text)}
             />
           ) : (
             !checked.length && (
@@ -61,7 +60,7 @@ const ListItem = ({
                 name="pencil"
                 size={20}
                 color="blue"
-                onPress={() => editItem(item.id, item.text, item.category)} // Pass category but don't edit it
+                onPress={() => editItem(item.id, item.text, item.category)}
               />
             )
           )}
@@ -89,18 +88,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  textContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   listItemText: {
     fontSize: 18,
+    flex: 1,
   },
   checkedItemText: {
     fontSize: 18,
     textDecorationLine: 'line-through',
     color: 'green',
+    flex: 1,
   },
   categoryText: {
     fontSize: 14,
     color: 'gray',
     marginLeft: 10,
+    flexShrink: 1,
   },
   iconView: {
     flexDirection: 'row',

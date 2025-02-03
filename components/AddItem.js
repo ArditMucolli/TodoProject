@@ -66,9 +66,11 @@ const AddItem = ({addItem}) => {
           <Text style={styles.categoryButtonText}>Work</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
-        <Text style={styles.btnText}>Add Todo</Text>
-      </TouchableOpacity>
+      <View style={styles.btnContainer}>
+        <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
+          <Text style={styles.btnText}>Add Todo</Text>
+        </TouchableOpacity>
+      </View>
 
       <Modal
         animationType="slide"
@@ -95,7 +97,14 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 5,
   },
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   btn: {
+    width: '70%',
+    alignItems: 'center',
     backgroundColor: 'darkslateblue',
     padding: 9,
     margin: 5,
