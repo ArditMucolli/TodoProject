@@ -96,12 +96,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   btn: {
-    backgroundColor: '#c2bad8',
+    backgroundColor: 'darkslateblue',
     padding: 9,
     margin: 5,
   },
   btnText: {
-    color: 'darkslateblue',
+    color: 'white',
     fontSize: 20,
     textAlign: 'center',
   },
@@ -136,18 +136,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   categoryButton: {
-    backgroundColor: '#c2bad8',
+    backgroundColor: '#6c757d',
     padding: 10,
     borderRadius: 5,
     minWidth: 80,
     alignItems: 'center',
   },
   categoryButtonText: {
-    color: 'darkslateblue',
+    color: 'white',
     fontSize: 16,
   },
   selectedCategory: {
-    backgroundColor: '#8a99e0',
+    backgroundColor: 'darkslateblue',
   },
 });
 
