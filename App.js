@@ -59,9 +59,7 @@ const App = () => {
 
   const saveEditItem = (id, text) => {
     setItems(prevItems => {
-      return prevItems.map(item =>
-        item.id === editItemDetail.id ? {id, text: editItemDetail.text} : item,
-      );
+      return prevItems.map(item => (item.id === id ? {...item, text} : item));
     });
     editStatusChange(!editStatus);
   };
@@ -81,10 +79,11 @@ const App = () => {
     ]);
   };
 
-  const editItem = (id, text) => {
+  const editItem = (id, text, category) => {
     editItemDetailChange({
       id,
       text,
+      category,
     });
     return editStatusChange(!editStatus);
   };

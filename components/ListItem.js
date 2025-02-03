@@ -30,25 +30,30 @@ const ListItem = ({
           <TextInput
             placeholder="Edit Todo..."
             style={styles.editItemInput}
-            onChangeText={handleEditChange}
+            value={editItemDetail.text} // Edit only the text
+            onChangeText={handleEditChange} // handle text input change
           />
         ) : (
-          <Text
-            onPress={() => itemChecked(item.id, item.text)}
-            style={
-              checked.length ? styles.checkedItemText : styles.listItemText
-            }>
-            {item.text}
-          </Text>
+          <>
+            <Text
+              onPress={() => itemChecked(item.id, item.text)}
+              style={
+                checked.length ? styles.checkedItemText : styles.listItemText
+              }>
+              {item.text}
+            </Text>
+            <Text style={styles.categoryText}>{item.category}</Text>{' '}
+            {/* Always display the category */}
+          </>
         )}
-        <Text style={styles.categoryText}>{item.category}</Text>
+
         <View style={styles.iconView}>
           {isEditing && editItemDetail.id === item.id ? (
             <Icon
               name="save"
               size={20}
               color="green"
-              onPress={() => saveEditItem(item.id, item.text)}
+              onPress={() => saveEditItem(item.id, editItemDetail.text)} // Save only text
             />
           ) : (
             !checked.length && (
@@ -56,7 +61,7 @@ const ListItem = ({
                 name="pencil"
                 size={20}
                 color="blue"
-                onPress={() => editItem(item.id, item.text)}
+                onPress={() => editItem(item.id, item.text, item.category)} // Pass category but don't edit it
               />
             )
           )}
@@ -105,6 +110,7 @@ const styles = StyleSheet.create({
   editItemInput: {
     padding: 0,
     fontSize: 18,
+    marginBottom: 10,
   },
 });
 
