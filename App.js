@@ -95,8 +95,11 @@ const App = () => {
     }
   };
 
-  const filteredItems = items.filter(item =>
-    item.text.toLowerCase().includes(searchQuery.toLowerCase()),
+  const filteredItems = items.filter(
+    item =>
+      item.text &&
+      typeof item.text === 'string' &&
+      item.text.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
