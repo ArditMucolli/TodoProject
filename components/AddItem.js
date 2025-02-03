@@ -16,15 +16,14 @@ const AddItem = ({addItem}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleAddItem = () => {
-    if (!text.trim()) {
-      Alert.alert('Please enter a todo!');
-      return;
-    }
-
     setModalVisible(true);
   };
 
   const confirmAddItem = () => {
+    if (!text.trim()) {
+      Alert.alert('Please enter a todo!');
+      return;
+    }
     addItem(text, category);
     setText('');
     setCategory('General');
@@ -32,45 +31,10 @@ const AddItem = ({addItem}) => {
   };
 
   return (
-    <View>
-      <TextInput
-        placeholder="Add Todo..."
-        style={styles.input}
-        onChangeText={setText}
-        value={text}
-      />
-      <Text style={styles.categoryText}>Select Category:</Text>
-      <View style={styles.categoryButtons}>
-        <TouchableOpacity
-          style={[
-            styles.categoryButton,
-            category === 'General' && styles.selectedCategory,
-          ]}
-          onPress={() => setCategory('General')}>
-          <Text style={styles.categoryButtonText}>General</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.categoryButton,
-            category === 'Personal' && styles.selectedCategory,
-          ]}
-          onPress={() => setCategory('Personal')}>
-          <Text style={styles.categoryButtonText}>Personal</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.categoryButton,
-            category === 'Work' && styles.selectedCategory,
-          ]}
-          onPress={() => setCategory('Work')}>
-          <Text style={styles.categoryButtonText}>Work</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
-          <Text style={styles.btnText}>Add Todo</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
+        <Text style={styles.btnText}>Add Todo</Text>
+      </TouchableOpacity>
 
       <Modal
         animationType="slide"
@@ -79,7 +43,39 @@ const AddItem = ({addItem}) => {
         onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
-            <Text>Are you sure you want to add this todo?</Text>
+            <TextInput
+              placeholder="Enter todo..."
+              style={styles.input}
+              onChangeText={setText}
+              value={text}
+            />
+            <Text style={styles.categoryText}>Select Category:</Text>
+            <View style={styles.categoryButtons}>
+              <TouchableOpacity
+                style={[
+                  styles.categoryButton,
+                  category === 'General' && styles.selectedCategory,
+                ]}
+                onPress={() => setCategory('General')}>
+                <Text style={styles.categoryButtonText}>General</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.categoryButton,
+                  category === 'Personal' && styles.selectedCategory,
+                ]}
+                onPress={() => setCategory('Personal')}>
+                <Text style={styles.categoryButtonText}>Personal</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.categoryButton,
+                  category === 'Work' && styles.selectedCategory,
+                ]}
+                onPress={() => setCategory('Work')}>
+                <Text style={styles.categoryButtonText}>Work</Text>
+              </TouchableOpacity>
+            </View>
             <View style={styles.modalButtons}>
               <Button title="Cancel" onPress={() => setModalVisible(false)} />
               <Button title="Confirm" onPress={confirmAddItem} />
@@ -92,63 +88,72 @@ const AddItem = ({addItem}) => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 60,
-    padding: 8,
-    margin: 5,
-  },
-  btnContainer: {
-    flexDirection: 'row',
+  container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
   btn: {
-    width: '70%',
-    alignItems: 'center',
+    width: '80%',
     backgroundColor: 'darkslateblue',
-    padding: 9,
-    margin: 5,
+    padding: 15,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   btnText: {
     color: 'white',
     fontSize: 20,
+    fontWeight: 'bold',
     textAlign: 'center',
   },
   modalContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   },
   modalView: {
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
     alignItems: 'center',
+    width: '80%',
+    maxWidth: 400,
   },
   modalButtons: {
     flexDirection: 'row',
-    gap: 10,
-    marginTop: 10,
-    justifyContent: 'space-between',
+    marginTop: 15,
+    gap: 15,
+    justifyContent: 'center',
+    width: '100%',
+  },
+  input: {
+    height: 50,
+    padding: 10,
+    marginBottom: 20,
+    width: '100%',
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    fontSize: 16,
   },
   categoryText: {
     padding: 10,
     fontSize: 18,
-    marginTop: 15,
-    marginBottom: 5,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   categoryButtons: {
-    padding: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 15,
+    width: '100%',
   },
   categoryButton: {
     backgroundColor: '#6c757d',
-    padding: 10,
+    padding: 12,
     borderRadius: 5,
-    minWidth: 80,
+    minWidth: 90,
     alignItems: 'center',
   },
   categoryButtonText: {

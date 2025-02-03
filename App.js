@@ -131,7 +131,6 @@ const App = () => {
       <Header title="Todo App" />
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <AddItem addItem={addItem} existingItems={items} />
-
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitleLeft}>Todos</Text>
         <Text style={styles.headerTitle}>Category</Text>
@@ -163,7 +162,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerContainer: {
-    marginTop: 15,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
