@@ -6,6 +6,7 @@ import ListItem from './components/ListItem';
 import AddItem from './components/AddItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchBar from './components/SearchBar';
+import CategoryFilter from './components/CategoryFilter'; // Import CategoryFilter
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -16,6 +17,7 @@ const App = () => {
   });
   const [checkedItems, checkedItemChange] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All'); // Default to 'All' category
 
   useEffect(() => {
     const loadItems = async () => {
@@ -119,11 +121,13 @@ const App = () => {
     }
   };
 
+  // Filter items based on search query and selected category
   const filteredItems = items.filter(
     item =>
       item.text &&
       typeof item.text === 'string' &&
-      item.text.toLowerCase().includes(searchQuery.toLowerCase()),
+      item.text.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      (selectedCategory === 'All' || item.category === selectedCategory), // Filter for 'All' as well
   );
 
   return (
@@ -131,6 +135,11 @@ const App = () => {
       <StatusBar barStyle="light-content" />
       <Header title="Todo App" />
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      <Text style={styles.categoryLabel}>Filter by Category:</Text>
+      <CategoryFilter
+        onCategorySelect={setSelectedCategory}
+        selectedCategory={selectedCategory}
+      />
       <AddItem addItem={addItem} existingItems={items} />
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitleLeft}>Todos</Text>
@@ -188,6 +197,13 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingBottom: 20,
+  },
+  categoryLabel: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+    marginVertical: 8,
+    marginLeft: 16, // Adds some space on the left for better alignment
   },
 });
 
