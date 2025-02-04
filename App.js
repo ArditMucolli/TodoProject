@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, StyleSheet, FlatList, Alert, Text} from 'react-native';
+import {View, StyleSheet, FlatList, Alert, Text, StatusBar} from 'react-native';
 import UUID from 'react-native-uuid';
 import Header from './components/Header';
 import ListItem from './components/ListItem';
@@ -128,6 +128,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <Header title="Todo App" />
       <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
       <AddItem addItem={addItem} existingItems={items} />
