@@ -1,14 +1,6 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Modal,
-  Button,
-  Alert,
-  Text,
-} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Text, Alert} from 'react-native';
+import TodoModal from './TodoModal';
 
 const AddItem = ({addItem}) => {
   const [text, setText] = useState('');
@@ -35,54 +27,15 @@ const AddItem = ({addItem}) => {
       <TouchableOpacity style={styles.btn} onPress={handleAddItem}>
         <Text style={styles.btnText}>Add Todo</Text>
       </TouchableOpacity>
-
-      <Modal
-        animationType="slide"
-        transparent={true}
+      <TodoModal
         visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            <TextInput
-              placeholder="Enter todo..."
-              style={styles.input}
-              onChangeText={setText}
-              value={text}
-            />
-            <Text style={styles.categoryText}>Select Category:</Text>
-            <View style={styles.categoryButtons}>
-              <TouchableOpacity
-                style={[
-                  styles.categoryButton,
-                  category === 'General' && styles.selectedCategory,
-                ]}
-                onPress={() => setCategory('General')}>
-                <Text style={styles.categoryButtonText}>General</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.categoryButton,
-                  category === 'Personal' && styles.selectedCategory,
-                ]}
-                onPress={() => setCategory('Personal')}>
-                <Text style={styles.categoryButtonText}>Personal</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.categoryButton,
-                  category === 'Work' && styles.selectedCategory,
-                ]}
-                onPress={() => setCategory('Work')}>
-                <Text style={styles.categoryButtonText}>Work</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.modalButtons}>
-              <Button title="Cancel" onPress={() => setModalVisible(false)} />
-              <Button title="Confirm" onPress={confirmAddItem} />
-            </View>
-          </View>
-        </View>
-      </Modal>
+        text={text}
+        setText={setText}
+        category={category}
+        setCategory={setCategory}
+        onCancel={() => setModalVisible(false)}
+        onConfirm={confirmAddItem}
+      />
     </View>
   );
 };
@@ -105,63 +58,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-  },
-  modalView: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-    width: '80%',
-    maxWidth: 400,
-  },
-  modalButtons: {
-    flexDirection: 'row',
-    marginTop: 15,
-    gap: 15,
-    justifyContent: 'center',
-    width: '100%',
-  },
-  input: {
-    height: 50,
-    padding: 10,
-    marginBottom: 20,
-    width: '100%',
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    fontSize: 16,
-  },
-  categoryText: {
-    padding: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  categoryButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 15,
-    width: '100%',
-  },
-  categoryButton: {
-    backgroundColor: '#6c757d',
-    padding: 12,
-    borderRadius: 5,
-    minWidth: 90,
-    alignItems: 'center',
-  },
-  categoryButtonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  selectedCategory: {
-    backgroundColor: 'darkslateblue',
   },
 });
 
