@@ -9,9 +9,9 @@ const Header = ({title}) => {
   );
 };
 
-Header.defaultProps = {
-  title: 'Todo App',
-};
+// Header.defaultProps = {
+//   title: 'Todo App',
+// };
 
 const styles = StyleSheet.create({
   header: {
